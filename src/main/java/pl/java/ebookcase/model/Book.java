@@ -1,44 +1,40 @@
 package pl.java.ebookcase.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
+@NoArgsConstructor
 @Entity
+@Table(name = "BOOKS")
 public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
     private String title;
-    private int pages;
+    private int amountOfPages;
 
     @ManyToOne
-    @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "CATEGORY_ID_FK"))
+    @JoinColumn(name = "category_id")
     private Category category;
 
     @ManyToOne
-    @JoinColumn(name = "author_id", foreignKey = @ForeignKey(name = "AUTHOR_ID_FK"))
+    @JoinColumn(name = "author_id")
     private Author author;
 
+    @ManyToMany(mappedBy = "books")
+    private Set<Bookcase> bookcases = new HashSet<>();
 
-    public Book(Integer id, String title, Author author, int pages, Category category) {
-        this.id = id;
+    public Book(String title, Author author, int amountOfPages, Category category) {
         this.title = title;
         this.author = author;
-        this.pages = pages;
+        this.amountOfPages = amountOfPages;
         this.category = category;
-    }
-
-    public Book(Book bookToCopy) {
-        this(
-                bookToCopy.getId(),
-                bookToCopy.getTitle(),
-                bookToCopy.getAuthor(),
-                bookToCopy.getPages(),
-                bookToCopy.getCategory()
-        );
     }
 
 }

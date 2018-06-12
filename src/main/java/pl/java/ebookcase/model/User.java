@@ -1,22 +1,26 @@
 package pl.java.ebookcase.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Data
+@NoArgsConstructor
 @Entity
+@Table(name = "USERS")
 public class User {
-    // do walidacji mozna uzyc @Pattern(regexp = "")
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
     private String login;
     private String name;
     private String surname;
+    @OneToOne(mappedBy = "user")
+    private Bookcase bookcase;
     @Transient
     @NotNull
     @Size(min = 5, max = 15)
@@ -29,9 +33,6 @@ public class User {
     private String passwordEncrypted;   // password in encrypted form
     private String passwordSalt;        // random number added to the password
 
-    public User() {
-    }
-
     public User(String name, String surname, String password, String confirmPassword, String email) {
         this.name = name;
         this.surname = surname;
@@ -40,15 +41,4 @@ public class User {
         this.email = email;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", password='" + password + '\'' +
-                ", confirmPassword='" + confirmPassword + '\'' +
-                ", email='" + email + '\'' +
-                '}';
-    }
 }

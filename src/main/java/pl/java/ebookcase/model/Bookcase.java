@@ -10,24 +10,20 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "AUTHORS")
-public class Author {
+@Table(name = "BOOKCASES")
+public class Bookcase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String name;
-    private String surname;
 
-    @OneToMany(mappedBy = "author")
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToMany
+    @JoinTable(name = "bookcase_book",
+            joinColumns = @JoinColumn(name = "bookcase_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id"))
     private Set<Book> books = new HashSet<>();
-
-    public Author(String name, String surname) {
-        this.name = name;
-        this.surname = surname;
-    }
-
-
-
-
 }
