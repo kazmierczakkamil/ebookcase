@@ -1,14 +1,14 @@
 package pl.java.ebookcase.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "BOOKS")
 public class Book {
@@ -27,8 +27,6 @@ public class Book {
     @JoinColumn(name = "author_id")
     private Author author;
 
-    @ManyToMany(mappedBy = "books")
-    private Set<Bookcase> bookcases = new HashSet<>();
 
     public Book(String title, Author author, int amountOfPages, Category category) {
         this.title = title;

@@ -1,4 +1,4 @@
-package pl.java.ebookcase.repositories;
+package pl.java.ebookcase.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

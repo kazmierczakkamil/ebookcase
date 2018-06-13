@@ -1,11 +1,10 @@
 package pl.java.ebookcase.bootstrap;
 
-import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 import pl.java.ebookcase.model.*;
-import pl.java.ebookcase.repositories.*;
+import pl.java.ebookcase.repository.*;
 
 import java.util.HashSet;
 import java.util.Set;
