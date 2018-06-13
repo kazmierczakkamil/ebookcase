@@ -6,6 +6,7 @@ import pl.java.ebookcase.model.Book;
 import pl.java.ebookcase.model.Category;
 import pl.java.ebookcase.repository.CategoryRepository;
 
+import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -19,5 +20,9 @@ public class CategoryService {
     }
     public Category getCategoryByBooks(Set<Book> books) {
         return categoryRepository.findCategoryByBooks(books);
+    }
+
+    public List<Category> getCategories() {
+        return categoryRepository.findAll();
     }
 }

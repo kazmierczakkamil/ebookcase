@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>eBookcase</title>
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+
+    <!-- Bootstrap core JavaScript
+================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"></script>
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/signin.css}" rel="stylesheet">
+</head>
+
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="main" th:href="@{/main}" class="navbar-brand">eBookcase</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <form th:action="@{/login}" method="post" class="form-horizontal">
+        <div class="form-group">
+            <label for="inputLogin" class="col-sm-5 control-label">Username:</label>
+            <div class="col-sm-3">
+                <input type="text" name="username" id="inputLogin" class="form-control" placeholder="Username"
+                       required
+                       autofocus>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword" class="col-sm-5 control-label">Password:</label>
+            <div class="col-sm-3">
+                <input type="password" name="password" id="inputPassword" class="form-control"
+                       placeholder="Password"
+                       required>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-5 col-md-7">
+                <button class="btn btn-default btn-primary" type="submit">Login</button>
+            </div>
+        </div>
+    </form>
+</div> <!-- /container -->
+
+</body>
+</html>

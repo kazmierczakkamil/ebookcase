@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>eBookcase - add author</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+
+    <script th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"></script>
+
+    <link th:href="@{/signin.css}" rel="stylesheet" media="screen"/>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a href="main" th:href="@{/main}" class="navbar-brand">eBookcase</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container text-center" >
+    <h4>Add author</h4>
+</div>
+<div class="container">
+    <form th:action="@{/newauthor}" method="post" class="form-horizontal">
+        <div class="form-group">
+            <label for="authorName" class="col-sm-5 control-label">Name:</label>
+            <div class="col-sm-3">
+                <input type="text" id="authorName" class="form-control" placeholder="Name"
+                       required
+                       autofocus>
+            </div>
+            <label for="authorSurname" class="col-sm-5 control-label">Surname:</label>
+            <div class="col-sm-3">
+                <input type="text" id="authorSurname" class="form-control"
+                       placeholder="Surname"
+                       required>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-5 col-md-7">
+                <button class="btn btn-default btn-primary" type="submit">Save</button>
+            </div>
+        </div>
+    </form>
+</div> <!-- /container -->
+
+
+
+</body>
+</html>
