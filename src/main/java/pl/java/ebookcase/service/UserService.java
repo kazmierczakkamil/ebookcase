@@ -20,4 +20,8 @@ public class UserService {
         user.setPasswordEncrypted(bCryptPasswordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
+
+    public User getUserByLogin(String login) {
+        return userRepository.findByLogin(login);
+    }
 }

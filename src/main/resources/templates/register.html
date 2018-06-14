@@ -32,11 +32,18 @@
                        required
                        autofocus>
             </div>
+
             <label for="readerSurname" class="col-sm-5 control-label">Surname:</label>
             <div class="col-sm-3">
                 <input type="text" id="readerSurname" th:field="*{surname}" class="form-control"
                        placeholder="Surname"
                        required>
+            </div>
+            <label for="readerLogin" class="col-sm-5 control-label">Login:</label>
+            <div class="col-sm-3">
+                <input type="text" id="readerLogin" th:field="*{login}" class="form-control" placeholder="Login"
+                       required
+                       autofocus>
             </div>
             <label for="readerEmail" class="col-sm-5 control-label">Email:</label>
             <div class="col-sm-3">
