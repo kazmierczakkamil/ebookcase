@@ -1,11 +1,13 @@
 package pl.java.ebookcase.service;
 
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import pl.java.ebookcase.model.Book;
 import pl.java.ebookcase.repository.BookRepository;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -14,6 +16,8 @@ public class BookService {
 
     private BookRepository bookRepository;
 
+
+    public List<Book> getBooks() { return bookRepository.findAll(); }
     public Book getBookById(Long id) {
         return bookRepository.findById(id).get();
     }

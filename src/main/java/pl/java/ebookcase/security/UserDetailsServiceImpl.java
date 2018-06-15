@@ -27,7 +27,7 @@ public class UserDetailsServiceImpl implements org.springframework.security.core
         try {
             return new User(user.getLogin(), user.getPasswordEncrypted(), getAuthorities());
         } catch (Exception e) {
-            throw new UsernameNotFoundException("User not found");
+            throw new UsernameNotFoundException("User " + username + " not found");
         }
     }
 

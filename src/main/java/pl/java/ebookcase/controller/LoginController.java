@@ -32,7 +32,7 @@ public class LoginController {
         User user = userService.getUserByLogin(username);
         model.addAttribute("user", user);
         model.addAttribute("username", username);
-        return "home";
+        return "redirect:/home";
     }
 
     @PostMapping("/login/failure")
