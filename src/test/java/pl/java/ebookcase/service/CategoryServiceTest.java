@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
+import org.mockito.internal.verification.VerificationModeFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -75,6 +76,7 @@ public class CategoryServiceTest {
     public void getCategoryByIdTest() {
         assertEquals(Long.valueOf(111L), categoryService.getCategoryById(111L).getId());
         assertEquals("kat", categoryService.getCategoryById(111L).getName());
+        Mockito.verify(categoryRepository, VerificationModeFactory.times(2)).findById(Mockito.any());
     }
 
     @Test()
@@ -82,6 +84,8 @@ public class CategoryServiceTest {
         Set<Book> bookSet = bookService.getBooksByAuthorId(1L);
         assertEquals(Long.valueOf(111L), categoryService.getCategoryByBooks(bookSet).getId());
         assertEquals("kat", categoryService.getCategoryByBooks(bookSet).getName());
+        Mockito.verify(bookRepository, VerificationModeFactory.times(1)).findBooksByAuthorId(Mockito.any());
+        Mockito.verify(categoryRepository, VerificationModeFactory.times(2)).findCategoryByBooks(Mockito.any());
     }
 
     @Test()
@@ -89,6 +93,7 @@ public class CategoryServiceTest {
         List<Category> categoryList = new ArrayList<>(categoryService.getCategories());
         assertEquals(Long.valueOf(111L), categoryList.get(0).getId());
         assertEquals("kat", categoryList.get(0).getName());
+        Mockito.verify(categoryRepository, VerificationModeFactory.times(1)).findAll();
     }
 
     @After

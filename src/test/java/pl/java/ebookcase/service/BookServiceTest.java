@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
+import org.mockito.internal.verification.VerificationModeFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -64,12 +65,14 @@ public class BookServiceTest {
     public void getBooksTest() {
         assertEquals(Long.valueOf(111L), bookService.getBooks().get(0).getId());
         assertEquals("jakas", bookService.getBooks().get(0).getTitle());
+        Mockito.verify(bookRepository, VerificationModeFactory.times(2)).findAll();
     }
 
     @Test()
     public void getBookByIdTest() {
         assertEquals(Long.valueOf(111L), bookService.getBookById(111L).getId());
         assertEquals("jakas", bookService.getBookById(111L).getTitle());
+        Mockito.verify(bookRepository, VerificationModeFactory.times(2)).findById(Mockito.any());
     }
 
     @Test()
@@ -77,6 +80,7 @@ public class BookServiceTest {
         List<Book> bookList = new ArrayList<>(bookService.getBooksByCategoryId(11L));
         assertEquals(Long.valueOf(111L), bookList.get(0).getId());
         assertEquals("jakas", bookList.get(0).getTitle());
+        Mockito.verify(bookRepository, VerificationModeFactory.times(1)).findBooksByCategoryId(Mockito.any());
     }
 
     @Test()
@@ -84,6 +88,7 @@ public class BookServiceTest {
         List<Book> bookList = new ArrayList<>(bookService.getBooksByAuthorId(1L));
         assertEquals(Long.valueOf(111L), bookList.get(0).getId());
         assertEquals("jakas", bookList.get(0).getTitle());
+        Mockito.verify(bookRepository, VerificationModeFactory.times(1)).findBooksByAuthorId(Mockito.any());
     }
 
     @Test()
@@ -93,6 +98,7 @@ public class BookServiceTest {
         List<Book> bookList = new ArrayList<>(bookService.getBooksById(booksId));
         assertEquals(Long.valueOf(111L), bookList.get(0).getId());
         assertEquals("jakas", bookList.get(0).getTitle());
+        Mockito.verify(bookRepository, VerificationModeFactory.times(1)).findAllById(Mockito.any());
     }
 
     @After
