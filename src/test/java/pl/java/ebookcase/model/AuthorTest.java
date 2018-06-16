@@ -2,12 +2,9 @@ package pl.java.ebookcase.model;
 
 import org.junit.Assert;
 import org.junit.Test;
-
 import javax.persistence.*;
-
 import java.util.HashSet;
 import java.util.Set;
-
 import static org.junit.Assert.*;
 
 public class AuthorTest {
@@ -17,7 +14,6 @@ public class AuthorTest {
 
     @Test
     public void typeAnnotations() {
-        //, Data.class, Slf4j.class, NoArgsConstructor.class, AllArgsConstructor.class
         pl.java.ebookcase.model.AssertAnnotations.assertType(Author.class, Entity.class, Table.class);
     }
 
