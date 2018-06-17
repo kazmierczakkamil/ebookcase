@@ -63,6 +63,8 @@ public class BookServiceTest {
         Mockito.when(bookRepository.findBooksByCategoryId(11L)).thenReturn(books);
         Mockito.when(bookRepository.findBooksByAuthorId(1L)).thenReturn(books);
         Mockito.when(bookRepository.findAllById(booksId)).thenReturn(bookList);
+        Mockito.when(bookRepository.findBooksListByAuthorId(1L)).thenReturn(bookList);
+        Mockito.when(bookRepository.findBooksListByCategoryId(11L)).thenReturn(bookList);
     }
 
     @Test()
@@ -103,6 +105,22 @@ public class BookServiceTest {
         assertEquals(Long.valueOf(111L), bookList.get(0).getId());
         assertEquals("jakas", bookList.get(0).getTitle());
         Mockito.verify(bookRepository, VerificationModeFactory.times(1)).findAllById(Mockito.any());
+    }
+
+    @Test()
+    public void getBooksListByAuthorIdTest() {
+        List<Book> bookList = bookService.getBooksListByAuthorId(1L);
+        assertEquals(Long.valueOf(111L), bookList.get(0).getId());
+        assertEquals("jakas", bookList.get(0).getTitle());
+        Mockito.verify(bookRepository, VerificationModeFactory.times(1)).findBooksListByAuthorId(Mockito.any());
+    }
+
+    @Test()
+    public void getBooksListByCategoryIdTest() {
+        List<Book> bookList = bookService.getBooksListByCategoryId(11L);
+        assertEquals(Long.valueOf(111L), bookList.get(0).getId());
+        assertEquals("jakas", bookList.get(0).getTitle());
+        Mockito.verify(bookRepository, VerificationModeFactory.times(1)).findBooksListByCategoryId(Mockito.any());
     }
 
     @After

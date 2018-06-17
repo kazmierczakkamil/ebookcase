@@ -14,9 +14,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import pl.java.ebookcase.model.Author;
 import pl.java.ebookcase.model.Book;
 import pl.java.ebookcase.repository.AuthorRepository;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -47,17 +46,26 @@ public class AuthorServiceTest {
         Book book = new Book();
         books.add(book);
         Author author = new Author(1L, "name", "surname", books);
+        List<Author> authorList = new ArrayList<>();
+        authorList.add(author);
         Mockito.when(authorRepository.findById(1L)).thenReturn(Optional.ofNullable(author));
+        Mockito.when(authorRepository.findAll()).thenReturn(authorList);
     }
 
     @Test()
     public void getAuthorByIdTest() {
         assertEquals(Long.valueOf(1L), authorService.getAuthorById(1L).getId());
+        Mockito.verify(authorRepository, VerificationModeFactory.times(1)).findById(Mockito.any());
+    }
+
+    @Test()
+    public void getAuthorsTest() {
+        assertEquals(Long.valueOf(1L), authorService.getAuthors().get(0).getId());
+        Mockito.verify(authorRepository, VerificationModeFactory.times(1)).findAll();
     }
 
     @After
-    public void verify() {
-        Mockito.verify(authorRepository, VerificationModeFactory.times(1)).findById(Mockito.any());
+    public void reset() {
         Mockito.reset(authorRepository);
     }
 }
