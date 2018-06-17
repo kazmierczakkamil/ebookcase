@@ -54,30 +54,21 @@
         </div>
     </div>
 </nav>
-<div class="jumbotron" style="clear:left; margin:auto; width:80%; margin-bottom:10px;">
+<div class="jumbotron" style="clear:left; margin:auto; width:40%; margin-bottom:10px;">
     <table class="table table-hover">
         <thead>
         <tr>
             <th scope="col">#</th>
             <th scope="col">Nazwisko autora</th>
             <th scope="col">Imię autora</th>
-            <th scope="col">Tytuł</th>
-            <th scope="col">Kategoria</th>
-            <th scope="col">Ilość stron</th>
         </tr>
         </thead>
         <tbody>
-        <th:block th:each="book,iter : ${books}">
+        <th:block th:each="author,iter : ${authors}">
                 <tr>
                     <th scope="row" th:text="${iter.index+1}">1</th>
-                    <td th:text="${book.author.surname}">Mark</td>
-                    <td th:text="${book.author.name}">Mark</td>
-                    <td th:text="${book.title}">Otto</td>
-                    <td th:text="${book.category.name}">Mark</td>
-                    <td th:text="${book.amountOfPages}">Mark</td>
-                    <td><a th:href="@{/book/}+${book.id}" class="btn btn-primary" role="button">Otwórz</a></td>
-                    <td th:if="!${bookcaseRecordService.isUserBookcaseContainsBook(book, session.user)}"><a th:href="@{/add/book/}+${book.id}" class="btn btn-primary" role="button">Dodaj do biblioteki</a></td>
-                    <td th:if="${bookcaseRecordService.isUserBookcaseContainsBook(book, session.user)}"><a th:href="@{/remove/book/}+${book.id}" class="btn btn-primary" role="button">Usuń z biblioteki</a></td>
+                    <td th:text="${author.surname}">Mark</td>
+                    <td th:text="${author.name}">Mark</td>
                 </tr>
         </th:block>
         </tbody>

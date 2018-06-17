@@ -1,18 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-    <title>eBookcase</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-
-    <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}"
-          rel="stylesheet" media="screen"/>
-
-    <script th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"></script>
-
-    <script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
-
-    <link th:href="@{/css/signin.css}" rel="stylesheet" media="screen"/>
-</head>
 <body>
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
@@ -45,7 +32,7 @@
                     <ul class="dropdown-menu">
                         <li>
                             <a href="#">
-                                <a th:href="@{/logout}" th:text="Wyloguj"></a>
+                                <a th:href="@{/logout}" th:text="Logout"></a>
                             </a>
                         </li>
                     </ul>
@@ -54,6 +41,41 @@
         </div>
     </div>
 </nav>
-<div class="welcome" style="clear:left; margin:auto; width:20%; margin-bottom:10px;">
-    <h1><span sec:authorize="isAuthenticated()">Welcome <span sec:authentication="name">Mark</span></span></h1>
+
+<div class="container text-center">
+    <h4>Dodaj książkę</h4>
 </div>
+<div class="container">
+    <form method="post" th:object="${category}" class="form-horizontal">
+        <div class="form-group">
+            <label for="title" class="col-sm-5 control-label">Nazwa:</label>
+            <div class="col-sm-3">
+                <input type="text" id="title" th:field="*{name}" class="form-control" placeholder="Title"
+                       required
+                       autofocus>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="form-group">
+    <div class="col-md-offset-5 col-md-7">
+        <button class="btn btn-default btn-primary" type="submit">Dodaj</button>
+    </div>
+</div>
+
+
+</body>
+<head>
+    <title>eBookcase - add book</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+
+    <script th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"></script>
+
+    <script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+
+    <link th:href="@{/css/signin.css}" rel="stylesheet" media="screen"/>
+</head>
+</html>

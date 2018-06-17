@@ -21,16 +21,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Książki
-                        <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#" th:href="@{/books}">Moje Książki</a></li>
-                        <li><a href="#"th:href="@{/newBook}">Dodaj Książkę</a></li>
-                    </ul>
-                </li>
-                <li><a th:href="@{/newauthor}">Autorzy</a></li>
+                <li><a th:href="@{/books}">Książki</a></li>
+                <li><a th:href="@{/authors}">Autorzy</a></li>
                 <li><a th:href="@{/categories}">Kategorie</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Moja biblioteka

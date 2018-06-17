@@ -21,16 +21,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Książki
-                        <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#" th:href="@{/books}">Moje Książki</a></li>
-                        <li><a href="#"th:href="@{/newBook}">Dodaj Książkę</a></li>
-                    </ul>
-                </li>
-                <li><a th:href="@{/newauthor}">Autorzy</a></li>
+                <li><a th:href="@{/books}">Książki</a></li>
+                <li><a th:href="@{/authors}">Autorzy</a></li>
                 <li><a th:href="@{/categories}">Kategorie</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Moja biblioteka
@@ -63,33 +55,41 @@
     </div>
 </nav>
 
-<div class="container text-center" >
+<div class="container text-center">
     <h4>Dodaj książkę</h4>
 </div>
 <div class="container">
-    <form th:action="@{/newBook}" method="post" class="form-horizontal">
+    <form method="post" th:object="${book}" class="form-horizontal">
         <div class="form-group">
+            <label for="author" class="col-sm-5 control-label">Autor:</label>
+            <div class="col-sm-3">
+                <select class="form-control" id="author">
+                    <option th:each="author : ${authors}" th:value="${author.id}" th:field="*{author}"
+                            th:text="${author.name} + ' ' + ${author.surname}">some
+                    </option>
+                </select>
+            </div>
             <label for="title" class="col-sm-5 control-label">Tytuł:</label>
             <div class="col-sm-3">
-                <input type="text" id="title" class="form-control" placeholder="Title"
+                <input type="text" id="title" th:field="*{title}" class="form-control" placeholder="Title"
                        required
                        autofocus>
             </div>
             <label for="amountOfPages" class="col-sm-5 control-label">Ilość stron:</label>
             <div class="col-sm-3">
-                <input type="text" id="amountOfPages" class="form-control"
+                <input type="text" id="amountOfPages" th:field="*{amountOfPages}" class="form-control"
                        placeholder="Amount Of Pages"
                        required>
             </div>
         </div>
-        <div class="form-group">
-            <div class="col-md-offset-5 col-md-7">
-                <button class="btn btn-default btn-primary" type="submit">Dodaj</button>
-            </div>
-        </div>
-    </form>
+</div>
+<div class="form-group">
+    <div class="col-md-offset-5 col-md-7">
+        <button class="btn btn-default btn-primary" type="submit">Dodaj</button>
+    </div>
+</div>
+</form>
 </div> <!-- /container -->
-
 
 
 </body>
