@@ -100,11 +100,4 @@ public class BookController {
         review.setUser((User) session.getAttribute("user"));
         return review;
     }
-
-    @GetMapping("/newBook")
-    public String newBook() {
-        return "newBook";
-    }
-
-
 }

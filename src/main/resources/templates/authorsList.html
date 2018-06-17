@@ -27,6 +27,13 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="#" th:href="@{/books}">Dostępne Książki</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Wyszukaj
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
                         <li><a href="#" th:href="@{/authors}">Autorzy</a></li>
                         <li><a href="#" th:href="@{/categories}">Kategorie</a></li>
                     </ul>
@@ -74,11 +81,11 @@
                 <th scope="row" th:text="${iter.index+1}">1</th>
                 <td th:text="${author.surname}">Mark</td>
                 <td th:text="${author.name}">Mark</td>
-                <td colspan="2">
+                <td>
                     <table>
                         <tr th:each="book : ${bookService.getBooksListByAuthorId(author.id)}">
                             <td th:text="${book.title}"></td>
-                            <td th:href="@{/book/}+${book.id}" class="btn btn-primary" role="button">Otwórz</td>
+                            <td><a th:href="@{/book/}+${book.id}" class="btn btn-primary" role="button">Otwórz</a></td>
                         </tr>
                     </table>
                 </td>
