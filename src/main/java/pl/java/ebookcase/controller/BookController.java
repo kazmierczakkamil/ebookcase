@@ -86,10 +86,13 @@ public class BookController {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     @GetMapping("/newBook")
     public String newBook() {
         return "newBook";
     }
+=======
+>>>>>>> abd34df056390016f36c55f6552eea59883ef00a
 =======
 >>>>>>> abd34df056390016f36c55f6552eea59883ef00a
 
