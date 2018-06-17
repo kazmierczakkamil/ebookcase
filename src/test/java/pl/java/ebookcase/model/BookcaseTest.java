@@ -21,7 +21,7 @@ public class BookcaseTest {
     public void fieldAnnotations() {
         AssertAnnotations.assertField(Bookcase.class, "id", Id.class, GeneratedValue.class);
         AssertAnnotations.assertField(Bookcase.class, "user", OneToOne.class, JoinColumn.class);
-        AssertAnnotations.assertField(Bookcase.class, "books", ManyToMany.class, JoinTable.class);
+        AssertAnnotations.assertField(Bookcase.class, "records", OneToMany.class);
     }
 
     @Test
@@ -40,15 +40,15 @@ public class BookcaseTest {
     @Test public void bookcaseNoArgsConstructorTest() {
         Bookcase bookcase = new Bookcase();
         assertNull(bookcase.getUser());
-        assertEquals(0, bookcase.getBooks().size());
+        assertEquals(0, bookcase.getRecords().size());
     }
 
     @Test public void authorAllArgsConstructorTest() {
-        Set<Book> books = new HashSet<>();
-        Book book = new Book();
-        books.add(book);
+        Set<BookcaseRecord> bookcaseRecords = new HashSet<>();
+        BookcaseRecord bookcaseRecord = new BookcaseRecord();
+        bookcaseRecords.add(bookcaseRecord);
         User user = new User("log", "n", "s", "123", "123", "@");
-        Bookcase bookcase = new Bookcase(1L, user, books);
+        Bookcase bookcase = new Bookcase(1L, user, bookcaseRecords);
         assertEquals(Long.valueOf(1L), bookcase.getId());
         assertEquals("log", bookcase.getUser().getLogin());
         assertEquals("n", bookcase.getUser().getName());
@@ -56,6 +56,6 @@ public class BookcaseTest {
         assertEquals("123", bookcase.getUser().getPassword());
         assertEquals("123", bookcase.getUser().getConfirmPassword());
         assertEquals("@", bookcase.getUser().getEmail());
-        assertEquals(books, bookcase.getBooks());
+        assertEquals(bookcaseRecords, bookcase.getRecords());
     }
 }

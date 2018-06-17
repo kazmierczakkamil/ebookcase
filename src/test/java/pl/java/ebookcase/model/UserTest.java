@@ -70,7 +70,10 @@ public class UserTest {
         Set<Book> books = new HashSet<>();
         Book book = new Book();
         books.add(book);
-        Bookcase bookcase = new Bookcase(1L, user0, books);
+        Set<BookcaseRecord> bookcaseRecords = new HashSet<>();
+        BookcaseRecord bookcaseRecord = new BookcaseRecord();
+        bookcaseRecords.add(bookcaseRecord);
+        Bookcase bookcase = new Bookcase(1L, user0, bookcaseRecords);
         User user = new User(1L, "log", "name", "surname", bookcase, "pass", "cpass", "mail", "passen");
         assertEquals(Long.valueOf(1L), user.getId());
         assertEquals("log", user.getLogin());
@@ -81,5 +84,6 @@ public class UserTest {
         assertEquals("cpass", user.getConfirmPassword());
         assertEquals("mail", user.getEmail());
         assertEquals("passen", user.getPasswordEncrypted());
+        assertNotNull(user.getBookcase().getRecords());
     }
 }
