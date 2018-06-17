@@ -57,7 +57,50 @@
         </div>
     </div>
 </nav>
-fadfadfafdadf
+<div class="jumbotron">
+    <div style="clear:left; margin:auto; width:40%; margin-bottom:10px;">
+    <table class="table table-hover" >
+        <tbody>
+        <tr>
+            <th scope="row">Tytuł:</th>
+            <td th:text="${session.book.title}"></td>
+        </tr>
+        <tr>
+            <th scope="row">Autor:</th>
+            <td th:text="${session.book.author.name} + ' ' + ${session.book.author.surname}">Mark</td>
+        </tr>
+        <tr>
+            <th scope="row">Katogoria:</th>
+            <td th:text="${session.book.category.name}">Horror</td>
+        </tr>
+        <tr>
+            <th scope="row">Ilość stron:</th>
+            <td th:text="${session.book.amountOfPages}"></td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+    <div style="clear:left; margin:auto; width:40%; margin-bottom:10px;">
+            <form th:action="@{/addReview}" th:object="${newReview}" method="post">
+                Treść:<br>
+                <textarea th:field="*{content}" rows="5" wrap="soft" style="width:500px;"></textarea><br>
+                <input type="submit" class="btn" value="Add review">
+            </form>
+    </div>
+
+<div>
+    <table class="table" style="width: 50%">
+        <th:block th:each="review : ${reviews}">
+            <tr>
+                <td th:text="${review.user.name} + ' ' + ${review.user.surname}">Mark</td>
+                <td th:text="${review.content}">Content</td>
+            </tr>
+        </th:block>
+    </table>
+</div>
+
+
+</div>
 
 </body>
 </html>

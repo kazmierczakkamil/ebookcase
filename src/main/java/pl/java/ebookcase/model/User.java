@@ -23,8 +23,10 @@ public class User {
     private String login;
     private String name;
     private String surname;
+
     @OneToOne(mappedBy = "user")
     private Bookcase bookcase;
+
     @Transient
     @NotNull
     @Size(min = 5, max = 15)

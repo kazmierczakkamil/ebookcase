@@ -21,17 +21,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/*", "/webjars/**","/h2-console/**").permitAll()
+                .antMatchers("/", "/main","/index","/register","/webjars/**","/h2-console/**","/css/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().loginPage("/login")
+                .formLogin()
+                .loginPage("/login")
+                .permitAll()
                 .successForwardUrl("/login/success")
                 .failureForwardUrl("/login/failure")
-                .permitAll()
                 .and()
                 .logout()
-                .logoutUrl("/logout")
-                .permitAll();
+                .logoutUrl("/logout");
 
         ///// needed for h2-console access
         http.csrf().disable();

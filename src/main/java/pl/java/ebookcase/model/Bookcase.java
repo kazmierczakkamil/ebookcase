@@ -25,9 +25,7 @@ public class Bookcase {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToMany
-    @JoinTable(name = "bookcase_book",
-            joinColumns = @JoinColumn(name = "bookcase_id"),
-            inverseJoinColumns = @JoinColumn(name = "book_id"))
-    private Set<Book> books = new HashSet<>();
+    @OneToMany(mappedBy = "bookcase")
+    private Set<BookcaseRecord> records = new HashSet<>();
+
 }

@@ -17,6 +17,8 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
     private BookRepository bookRepository;
     private UserService userService;
     private CategoryRepository categoryRepository;
+    private BookcaseRecordRepository bookcaseRecordRepository;
+    private ReviewRepository reviewRepository;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
@@ -29,17 +31,30 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         Category cat3 = new Category("Sensacja");
         Author author1 = new Author("Pawel", "Ograbek");
         Book book1 = new Book("Tytul", author1, 200, cat1);
+        Book book2 = new Book("Jak zaliczyć PKCK", author1, 300, cat2);
         User user1 = new User("some", "Rafal", "Wojcik", "piespies", "piespies", "pies@com.pl");
-        Bookcase bookcase1 = new Bookcase();
-        bookcase1.getBooks().add(book1);
-        bookcase1.setUser(user1);
+        User user2 = new User("other", "Antek", "Babel", "piespies", "piespies", "pies1@com.pl");
 
         categoryRepository.save(cat1);
         categoryRepository.save(cat2);
         categoryRepository.save(cat3);
         authorRepository.save(author1);
         bookRepository.save(book1);
-        userService.save(user1);
-        bookcaseRepository.save(bookcase1);
+        bookRepository.save(book2);
+        user1 = userService.save(user1);
+        user2 = userService.save(user2);
+
+        Review review1 = new Review("Bardzo dobra książka.", book1, user1);
+        Review review2 = new Review("Wy****** mam w to.", book1, user2);
+
+
+
+        BookcaseRecord record1 = new BookcaseRecord(book1, user1.getBookcase());
+        BookcaseRecord record2 = new BookcaseRecord(book2, user1.getBookcase());
+
+        bookcaseRecordRepository.save(record1);
+        bookcaseRecordRepository.save(record2);
+        reviewRepository.save(review1);
+        reviewRepository.save(review2);
     }
 }

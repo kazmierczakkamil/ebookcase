@@ -11,7 +11,7 @@
 
     <script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
 
-    <link th:href="@{/signin.css}" rel="stylesheet" media="screen"/>
+    <link th:href="@{/css/signin.css}" rel="stylesheet" media="screen"/>
 </head>
 <body>
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -28,7 +28,7 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Moje książki</a></li>
+                        <li><a href="#" th:href="@{/myBooks}">Moje książki</a></li>
                         <li><a href="#">Moje półki</a></li>
                         <!--<li role="separator" class="divider"></li>-->
                         <!--<li class="dropdown-header">Nav header</li>-->
@@ -43,7 +43,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <span class="glyphicon glyphicon-user"></span>
-                        <span th:text="${username}"></span>
+                        <span th:text="${session.username}" th:unless="${session == null}"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li>
@@ -57,6 +57,35 @@
         </div>
     </div>
 </nav>
+<div class="jumbotron">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Tytuł</th>
+            <th scope="col">Autor</th>
+            <th scope="col">Kategoria</th>
+            <th scope="col">Ilość stron</th>
+            <th scope="col">Data dodania</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="record,iter : ${records}">
+            <tr>
+                <th scope="row" th:text="${iter.index+1}">1</th>
+                <td th:text="${record.book.title}">Mark</td>
+                <td th:text="${record.book.author.name} + ' ' + ${record.book.author.surname}">Mark</td>
+                <td th:text="${record.book.category.name}">Otto</td>
+                <td th:text="${record.book.amountOfPages}">Mark</td>
+                <td th:text="${record.dateAdded}">Mark</td>
+                <td><a th:href="@{/book/}+${record.book.id}" class="btn btn-primary" role="button">Otwórz</a></td>
+                <td><a th:href="@{/remove/book/}+${record.book.id}" class="btn btn-primary" role="button">Usuń</a></td>
+
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+</div>
 
 </body>
 </html>

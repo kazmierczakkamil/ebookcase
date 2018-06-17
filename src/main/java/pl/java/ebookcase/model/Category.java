@@ -25,8 +25,6 @@ public class Category {
     @OneToMany(mappedBy = "category")
     private Set<Book> books = new HashSet<>();
 
-
-
     public Category(String name) {
         this.name = name;
         log.info("Category created: " + this);

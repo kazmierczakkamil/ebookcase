@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Slf4j
@@ -28,6 +30,9 @@ public class Book {
     @ManyToOne
     @JoinColumn(name = "author_id")
     private Author author;
+
+    @OneToMany(mappedBy = "book")
+    private Set<Review> reviews = new HashSet<>();
 
     public Book(String title, Author author, int amountOfPages, Category category) {
         this.title = title;
