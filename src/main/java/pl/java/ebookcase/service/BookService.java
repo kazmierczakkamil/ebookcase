@@ -16,8 +16,8 @@ public class BookService {
 
     private BookRepository bookRepository;
 
-
     public List<Book> getBooks() { return bookRepository.findAll(); }
+
     public Book getBookById(Long id) {
         return bookRepository.findById(id).get();
     }
@@ -32,5 +32,9 @@ public class BookService {
 
     public Set<Book> getBooksById(Set<Long> bookIds) {
         return new HashSet<>(bookRepository.findAllById(bookIds));
+    }
+
+    public Book save(Book book) {
+        return  bookRepository.save(book);
     }
 }

@@ -26,7 +26,7 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#" th:href="@{/books}">Moje Książki</a></li>
+                        <li><a href="#" th:href="@{/books}">Dostępne Książki</a></li>
                         <li><a href="#"th:href="@{/newBook}">Dodaj Książkę</a></li>
                     </ul>
                 </li>
@@ -67,7 +67,7 @@
     <h4>Dodaj książkę</h4>
 </div>
 <div class="container">
-    <form th:action="@{/newBook}" method="post" class="form-horizontal">
+    <form th:action="@{/addBook}" th:object="${newBook}" method="post" class="form-horizontal">
         <div class="form-group">
             <label for="title" class="col-sm-5 control-label">Tytuł:</label>
             <div class="col-sm-3">
@@ -81,6 +81,26 @@
                        placeholder="Amount Of Pages"
                        required>
             </div>
+            <!--<label for="category" class="col-sm-5 control-label">Kategoria:</label>-->
+            <!--<div class="col-sm-3">-->
+                <!--<form th:action="@{category}" th:object="${newBook}">-->
+                    <!--<input list="categories" name="Kategorie">-->
+                    <!--<datalist th:each="cat : ${categories}" id="categories">-->
+                        <!--<option th:value="${cat.name}" th:field="*{category}" id="category"/>-->
+                    <!--</datalist>-->
+                    <!--<input type="submit">-->
+                <!--</form>-->
+            <!--</div>-->
+            <!--<label for="author" class="col-sm-5 control-label">Autor:</label>-->
+            <!--<div class="col-sm-3">-->
+                <!--&lt;!&ndash;<form th:action="@{authors}" th:object="${authors}">&ndash;&gt;-->
+                    <!--<input list="authors" name="Autorzy">-->
+                    <!--<datalist th:each="author : ${}" id="authors">-->
+                        <!--<option th:value="${author.name} + ${author.surname}" th:field="*{author}" id="author"/>-->
+                    <!--</datalist>-->
+                    <!--<input type="submit">-->
+                <!--</form>-->
+            <!--</div>-->
         </div>
         <div class="form-group">
             <div class="col-md-offset-5 col-md-7">

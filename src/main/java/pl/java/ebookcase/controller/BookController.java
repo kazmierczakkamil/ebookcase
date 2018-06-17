@@ -7,10 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import pl.java.ebookcase.model.Book;
-import pl.java.ebookcase.model.BookcaseRecord;
-import pl.java.ebookcase.model.Review;
-import pl.java.ebookcase.model.User;
+import pl.java.ebookcase.model.*;
 import pl.java.ebookcase.service.BookService;
 import pl.java.ebookcase.service.BookcaseRecordService;
 import pl.java.ebookcase.service.ReviewService;
@@ -83,6 +80,22 @@ public class BookController {
         review.setBook((Book) session.getAttribute("book"));
         review.setUser((User) session.getAttribute("user"));
         return review;
+    }
+
+    @PostMapping("/addBook")
+    public String addBook(@ModelAttribute("newBook") Book book) {
+        Book saved = bookService.save(book);
+        return "redirect:/book";
+    }
+
+    @ModelAttribute("newBook")
+    public Book newBook(HttpSession session) {
+        Book book = new Book();
+        book.setTitle((String) session.getAttribute("title"));
+        book.setAuthor((Author) session.getAttribute("author"));
+        book.setAmountOfPages((int) session.getAttribute("amountOfPages"));
+        book.setCategory((Category) session.getAttribute("category"));
+        return book;
     }
 
     @GetMapping("/newBook")
