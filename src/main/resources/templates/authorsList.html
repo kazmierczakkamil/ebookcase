@@ -84,7 +84,8 @@
                 <td>
                     <table>
                         <tr th:each="book : ${bookService.getBooksListByAuthorId(author.id)}">
-                            <td th:text="${book.title}"></td>
+                            <td width="200px" th:text="${book.title}"></td>
+                            <td width="100px"></td>
                             <td><a th:href="@{/book/}+${book.id}" class="btn btn-primary" role="button">Otwórz</a></td>
                         </tr>
                     </table>
