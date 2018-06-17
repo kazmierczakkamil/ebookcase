@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <title>eBookcase - add author</title>
+    <title>eBookcase</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
     <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}"
@@ -49,7 +49,7 @@
                     <ul class="dropdown-menu">
                         <li>
                             <a href="#">
-                                <a th:href="@{/logout}" th:text="Logout"></a>
+                                <a th:href="@{/logout}" th:text="Wyloguj"></a>
                             </a>
                         </li>
                     </ul>
@@ -58,35 +58,35 @@
         </div>
     </div>
 </nav>
-
-<div class="container text-center" >
-    <h4>Dodaj autora</h4>
+<div class="jumbotron" style="clear:left; margin:auto; width:70%; margin-bottom:10px;">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nazwisko autora</th>
+            <th scope="col">Imię autora</th>
+            <th scope="col">Książki autora</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="author,iter : ${authors}">
+            <tr>
+                <th scope="row" th:text="${iter.index+1}">1</th>
+                <td th:text="${author.surname}">Mark</td>
+                <td th:text="${author.name}">Mark</td>
+                <td colspan="2">
+                    <table>
+                        <tr th:each="book : ${bookService.getBooksListByAuthorId(author.id)}">
+                            <td th:text="${book.title}"></td>
+                            <td th:href="@{/book/}+${book.id}" class="btn btn-primary" role="button">Otwórz</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
 </div>
-<div class="container">
-    <form th:action="@{/newauthor}" method="post" class="form-horizontal">
-        <div class="form-group">
-            <label for="authorName" class="col-sm-5 control-label">Imię:</label>
-            <div class="col-sm-3">
-                <input type="text" id="authorName" class="form-control" placeholder="Name"
-                       required
-                       autofocus>
-            </div>
-            <label for="authorSurname" class="col-sm-5 control-label">Nazwisko:</label>
-            <div class="col-sm-3">
-                <input type="text" id="authorSurname" class="form-control"
-                       placeholder="Surname"
-                       required>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-5 col-md-7">
-                <button class="btn btn-default btn-primary" type="submit">Dodaj</button>
-            </div>
-        </div>
-    </form>
-</div> <!-- /container -->
-
-
 
 </body>
 </html>

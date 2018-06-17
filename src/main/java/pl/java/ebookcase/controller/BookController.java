@@ -7,17 +7,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import pl.java.ebookcase.model.Book;
-import pl.java.ebookcase.model.BookcaseRecord;
-import pl.java.ebookcase.model.Review;
-import pl.java.ebookcase.model.User;
-import pl.java.ebookcase.service.BookService;
-import pl.java.ebookcase.service.BookcaseRecordService;
-import pl.java.ebookcase.service.ReviewService;
+import pl.java.ebookcase.model.*;
+import pl.java.ebookcase.service.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 @AllArgsConstructor
 @Controller
@@ -26,6 +24,8 @@ public class BookController {
     private BookService bookService;
     private ReviewService reviewService;
     private BookcaseRecordService bookcaseRecordService;
+    private AuthorService authorService;
+    private CategoryService categoryService;
 
     @GetMapping("/books")
     public String showAllBooks(Model model) {
@@ -33,6 +33,22 @@ public class BookController {
         model.addAttribute("books", books);
         model.addAttribute("bookcaseRecordService", bookcaseRecordService);
         return "booksList";
+    }
+
+    @GetMapping("/authors")
+    public String showAllAuthors(Model model) {
+        List<Author> authors = authorService.getAuthors();
+        model.addAttribute("authors", authors);
+        model.addAttribute("bookService", bookService);
+        return "authorsList";
+    }
+
+    @GetMapping("/categories")
+    public String showAllCategories(Model model) {
+        List<Category> categories = categoryService.getCategories();
+        model.addAttribute("categories", categories);
+        model.addAttribute("bookService", bookService);
+        return "categoriesList";
     }
 
     @GetMapping("book/{id}")

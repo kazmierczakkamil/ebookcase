@@ -30,8 +30,10 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         Category cat2 = new Category("Komedia");
         Category cat3 = new Category("Sensacja");
         Author author1 = new Author("Pawel", "Ograbek");
+        Author author2 = new Author("Kamil", "Kaźmierczak");
         Book book1 = new Book("Tytul", author1, 200, cat1);
         Book book2 = new Book("Jak zaliczyć PKCK", author1, 300, cat2);
+        Book book3 = new Book("Coś", author2, 400, cat3);
         User user1 = new User("some", "Rafal", "Wojcik", "piespies", "piespies", "pies@com.pl");
         User user2 = new User("other", "Antek", "Babel", "piespies", "piespies", "pies1@com.pl");
         User user3 = new User("aaa", "aaa", "aaa", "aaaaa", "aaaaa", "aa@aa.aa");
@@ -40,8 +42,10 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         categoryRepository.save(cat2);
         categoryRepository.save(cat3);
         authorRepository.save(author1);
+        authorRepository.save(author2);
         bookRepository.save(book1);
         bookRepository.save(book2);
+        bookRepository.save(book3);
         user1 = userService.save(user1);
         user2 = userService.save(user2);
         user3 = userService.save(user3);

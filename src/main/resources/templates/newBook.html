@@ -26,12 +26,11 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#" th:href="@{/books}">Moje Książki</a></li>
-                        <li><a href="#"th:href="@{/newBook}">Dodaj Książkę</a></li>
+                        <li><a href="#" th:href="@{/books}">Dostępne Książki</a></li>
+                        <li><a href="#" th:href="@{/authors}">Autorzy</a></li>
+                        <li><a href="#" th:href="@{/categories}">Kategorie</a></li>
                     </ul>
                 </li>
-                <li><a th:href="@{/newauthor}">Autorzy</a></li>
-                <li><a th:href="@{/categories}">Kategorie</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Moja biblioteka
                         <span class="caret"></span>
@@ -40,9 +39,6 @@
                         <li><a href="#" th:href="@{/myBooks}">Moje książki</a></li>
                     </ul>
                 </li>
-                <li><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/addBook}">Dodaj książkę</a></li>
-                <li><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/addAuthor}">Dodaj autora</a></li>
-                <li><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/addCategory}">Dodaj kategorię</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">

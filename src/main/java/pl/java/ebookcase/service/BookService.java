@@ -33,4 +33,12 @@ public class BookService {
     public Set<Book> getBooksById(Set<Long> bookIds) {
         return new HashSet<>(bookRepository.findAllById(bookIds));
     }
+
+    public List<Book> getBooksListByAuthorId(Long authorId) {
+        return bookRepository.findBooksListByAuthorId(authorId);
+    }
+
+    public List<Book> getBooksListByCategoryId(Long categoryId) {
+        return bookRepository.findBooksListByCategoryId(categoryId);
+    }
 }
