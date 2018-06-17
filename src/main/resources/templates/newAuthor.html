@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title>eBookcase - add author</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -31,23 +31,20 @@
                     </ul>
                 </li>
                 <li><a th:href="@{/newauthor}">Autorzy</a></li>
+                <li><a th:href="@{/categories}">Kategorie</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Moja biblioteka
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="#" th:href="@{/myBooks}">Moje książki</a></li>
-                        <!--<li><a href="#">Moje półki</a></li>-->
-                        <!--<li role="separator" class="divider"></li>-->
-                        <!--<li class="dropdown-header">Nav header</li>-->
-                        <!--<li><a href="#">Separated link</a></li>-->
-                        <!--<li><a href="#">One more separated link</a></li>-->
                     </ul>
                 </li>
+                <li><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/addBook}">Dodaj książkę</a></li>
+                <li><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/addAuthor}">Dodaj autora</a></li>
+                <li><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/addCategory}">Dodaj kategorię</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <!--<li><a href="#">Default</a></li>-->
-                <!--<li><a href="#">Static top <span class="sr-only">(current)</span></a></li>-->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <span class="glyphicon glyphicon-user"></span>
