@@ -3,15 +3,21 @@ package pl.java.ebookcase.controller;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-import pl.java.ebookcase.model.*;
-import pl.java.ebookcase.service.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import pl.java.ebookcase.model.Book;
+import pl.java.ebookcase.model.BookcaseRecord;
+import pl.java.ebookcase.model.Review;
+import pl.java.ebookcase.model.User;
+import pl.java.ebookcase.service.BookService;
+import pl.java.ebookcase.service.BookcaseRecordService;
+import pl.java.ebookcase.service.ReviewService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
-import java.util.Set;
 
 @AllArgsConstructor
 @Controller
@@ -41,7 +47,7 @@ public class BookController {
     @GetMapping("/add/book/{id}")
     public String addBookToBookcase(@PathVariable("id") Long id, HttpSession session, HttpServletRequest request) {
         Book book = bookService.getBookById(id);
-        User user = (User)session.getAttribute("user");
+        User user = (User) session.getAttribute("user");
         bookcaseRecordService.save(book, user);
         String previousPage = request.getHeader("Referer");
         return "redirect:" + previousPage;
@@ -50,7 +56,7 @@ public class BookController {
     @GetMapping("/remove/book/{id}")
     public String removeBookFromBookcase(@PathVariable("id") Long id, HttpSession session, HttpServletRequest request) {
         Book book = bookService.getBookById(id);
-        User user = (User)session.getAttribute("user");
+        User user = (User) session.getAttribute("user");
         bookcaseRecordService.remove(book, user);
         String previousPage = request.getHeader("Referer");
         return "redirect:" + previousPage;
@@ -58,7 +64,7 @@ public class BookController {
 
     @GetMapping("/myBooks")
     public String showMyBooks(Model model, HttpSession session) {
-        User user = (User)session.getAttribute("user");
+        User user = (User) session.getAttribute("user");
         List<BookcaseRecord> records = bookcaseRecordService.getBookcaseRecordsByUser(user);
         model.addAttribute("records", records);
         model.addAttribute("bookcaseRecordService", bookcaseRecordService);
@@ -74,11 +80,10 @@ public class BookController {
     @ModelAttribute("newReview")
     public Review newReview(HttpSession session) {
         Review review = new Review();
-        review.setBook((Book)session.getAttribute("book"));
-        review.setUser((User)session.getAttribute("user"));
+        review.setBook((Book) session.getAttribute("book"));
+        review.setUser((User) session.getAttribute("user"));
         return review;
     }
-
 
 
 }
