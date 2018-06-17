@@ -12,10 +12,8 @@ import pl.java.ebookcase.service.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Controller
@@ -29,7 +27,9 @@ public class BookController {
 
     @GetMapping("/books")
     public String showAllBooks(Model model) {
-        List<Book> books = bookService.getBooks();
+        List<Book> books = bookService.getBooks().stream()
+                .sorted(Comparator.comparing(Book::getTitle))
+                .collect(Collectors.toList());
         model.addAttribute("books", books);
         model.addAttribute("bookcaseRecordService", bookcaseRecordService);
         return "booksList";
@@ -37,7 +37,9 @@ public class BookController {
 
     @GetMapping("/authors")
     public String showAllAuthors(Model model) {
-        List<Author> authors = authorService.getAuthors();
+        List<Author> authors = authorService.getAuthors().stream()
+                .sorted(Comparator.comparing(Author::getSurname))
+                .collect(Collectors.toList());
         model.addAttribute("authors", authors);
         model.addAttribute("bookService", bookService);
         return "authorsList";
@@ -45,7 +47,9 @@ public class BookController {
 
     @GetMapping("/categories")
     public String showAllCategories(Model model) {
-        List<Category> categories = categoryService.getCategories();
+        List<Category> categories = categoryService.getCategories().stream()
+                .sorted(Comparator.comparing(Category::getName))
+                .collect(Collectors.toList());
         model.addAttribute("categories", categories);
         model.addAttribute("bookService", bookService);
         return "categoriesList";
@@ -81,7 +85,9 @@ public class BookController {
     @GetMapping("/myBooks")
     public String showMyBooks(Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");
-        List<BookcaseRecord> records = bookcaseRecordService.getBookcaseRecordsByUser(user);
+        List<BookcaseRecord> records = bookcaseRecordService.getBookcaseRecordsByUser(user).stream()
+                .sorted(Comparator.comparing(BookcaseRecord::getDateAdded).reversed())
+                .collect(Collectors.toList());
         model.addAttribute("records", records);
         model.addAttribute("bookcaseRecordService", bookcaseRecordService);
         return "myBooks";

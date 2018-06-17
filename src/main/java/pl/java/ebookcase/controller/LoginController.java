@@ -25,11 +25,11 @@ public class LoginController {
     public String successLogin(HttpSession session) {
         org.springframework.security.core.userdetails.User principal =
                 (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String username = principal.getUsername();
-        User user = userService.getUserByLogin(username);
+        User user = userService.getUserByLogin(principal.getUsername());
+        String nameAndSurname = user.getName() + " " + user.getSurname();
 
         session.setAttribute("user", user);
-        session.setAttribute("username", username);
+        session.setAttribute("username", nameAndSurname);
 
         return "redirect:/";
     }
