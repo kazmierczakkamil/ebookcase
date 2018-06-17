@@ -9,30 +9,76 @@
 
     <script th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"></script>
 
+    <script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+
     <link th:href="@{/css/signin.css}" rel="stylesheet" media="screen"/>
 </head>
 <body>
 <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
+    <div class="container-fluid">
         <div class="navbar-header">
             <a href="main" th:href="@{/main}" class="navbar-brand">eBookcase</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Książki
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" th:href="@{/books}">Moje Książki</a></li>
+                        <li><a href="#"th:href="@{/newBook}">Dodaj Książkę</a></li>
+                    </ul>
+                </li>
+                <li><a th:href="@{/newauthor}">Autorzy</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Moja biblioteka
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" th:href="@{/myBooks}">Moje książki</a></li>
+                        <!--<li><a href="#">Moje półki</a></li>-->
+                        <!--<li role="separator" class="divider"></li>-->
+                        <!--<li class="dropdown-header">Nav header</li>-->
+                        <!--<li><a href="#">Separated link</a></li>-->
+                        <!--<li><a href="#">One more separated link</a></li>-->
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <!--<li><a href="#">Default</a></li>-->
+                <!--<li><a href="#">Static top <span class="sr-only">(current)</span></a></li>-->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-user"></span>
+                        <span th:text="${session.username}" th:unless="${session == null}"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#">
+                                <a th:href="@{/logout}" th:text="Logout"></a>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
         </div>
     </div>
 </nav>
 
 <div class="container text-center" >
-    <h4>Add author</h4>
+    <h4>Dodaj autora</h4>
 </div>
 <div class="container">
     <form th:action="@{/newauthor}" method="post" class="form-horizontal">
         <div class="form-group">
-            <label for="authorName" class="col-sm-5 control-label">Name:</label>
+            <label for="authorName" class="col-sm-5 control-label">Imię:</label>
             <div class="col-sm-3">
                 <input type="text" id="authorName" class="form-control" placeholder="Name"
                        required
                        autofocus>
             </div>
-            <label for="authorSurname" class="col-sm-5 control-label">Surname:</label>
+            <label for="authorSurname" class="col-sm-5 control-label">Nazwisko:</label>
             <div class="col-sm-3">
                 <input type="text" id="authorSurname" class="form-control"
                        placeholder="Surname"
@@ -41,7 +87,7 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-5 col-md-7">
-                <button class="btn btn-default btn-primary" type="submit">Save</button>
+                <button class="btn btn-default btn-primary" type="submit">Dodaj</button>
             </div>
         </div>
     </form>

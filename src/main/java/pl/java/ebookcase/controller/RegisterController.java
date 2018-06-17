@@ -30,7 +30,7 @@ public class RegisterController {
 
         User saved = userService.save(user);
         model.addAttribute("user", saved);
-        return "userView";
+        return "redirect:/login";
     }
 
 

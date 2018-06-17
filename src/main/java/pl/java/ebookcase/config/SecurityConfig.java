@@ -21,7 +21,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/main","/index","/register","/webjars/**","/h2-console/**","/css/**").permitAll()
+                .antMatchers("/", "/main", "/index", "/register", "/webjars/**", "/h2-console/**", "/css/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -31,12 +31,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureForwardUrl("/login/failure")
                 .and()
                 .logout()
-                .logoutUrl("/logout");
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/index");
 
-        ///// needed for h2-console access
+
         http.csrf().disable();
-        http.headers().frameOptions().disable();
-        /////
+        http.headers().frameOptions().disable(); // needed for h2-console access
     }
 
     @Override

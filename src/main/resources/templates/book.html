@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title>eBookcase</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -21,25 +21,43 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
+<<<<<<< HEAD
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Książki
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" th:href="@{/books}">Moje Książki</a></li>
+                        <li><a href="#"th:href="@{/newBook}">Dodaj Książkę</a></li>
+                    </ul>
+                </li>
+                <li><a th:href="@{/newauthor}">Autorzy</a></li>
+=======
                 <li><a th:href="@{/books}">Książki</a></li>
-                <li><a href="#contact">Autorzy</a></li>
+                <li><a th:href="@{/authors}">Autorzy</a></li>
+                <li><a th:href="@{/categories}">Kategorie</a></li>
+>>>>>>> abd34df056390016f36c55f6552eea59883ef00a
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Moja biblioteka
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="#" th:href="@{/myBooks}">Moje książki</a></li>
-                        <li><a href="#">Moje półki</a></li>
+<<<<<<< HEAD
+                        <!--<li><a href="#">Moje półki</a></li>-->
                         <!--<li role="separator" class="divider"></li>-->
                         <!--<li class="dropdown-header">Nav header</li>-->
                         <!--<li><a href="#">Separated link</a></li>-->
                         <!--<li><a href="#">One more separated link</a></li>-->
+=======
+>>>>>>> abd34df056390016f36c55f6552eea59883ef00a
                     </ul>
                 </li>
+                <li><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/addBook}">Dodaj książkę</a></li>
+                <li><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/addAuthor}">Dodaj autora</a></li>
+                <li><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/addCategory}">Dodaj kategorię</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <!--<li><a href="#">Default</a></li>-->
-                <!--<li><a href="#">Static top <span class="sr-only">(current)</span></a></li>-->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <span class="glyphicon glyphicon-user"></span>
@@ -48,7 +66,7 @@
                     <ul class="dropdown-menu">
                         <li>
                             <a href="#">
-                                <a th:href="@{/logout}" th:text="Logout"></a>
+                                <a th:href="@{/logout}" th:text="Wyloguj"></a>
                             </a>
                         </li>
                     </ul>
@@ -59,45 +77,45 @@
 </nav>
 <div class="jumbotron">
     <div style="clear:left; margin:auto; width:40%; margin-bottom:10px;">
-    <table class="table table-hover" >
-        <tbody>
-        <tr>
-            <th scope="row">Tytuł:</th>
-            <td th:text="${session.book.title}"></td>
-        </tr>
-        <tr>
-            <th scope="row">Autor:</th>
-            <td th:text="${session.book.author.name} + ' ' + ${session.book.author.surname}">Mark</td>
-        </tr>
-        <tr>
-            <th scope="row">Katogoria:</th>
-            <td th:text="${session.book.category.name}">Horror</td>
-        </tr>
-        <tr>
-            <th scope="row">Ilość stron:</th>
-            <td th:text="${session.book.amountOfPages}"></td>
-        </tr>
-        </tbody>
-    </table>
+        <table class="table table-hover">
+            <tbody>
+            <tr>
+                <th scope="row">Tytuł:</th>
+                <td th:text="${session.book.title}"></td>
+            </tr>
+            <tr>
+                <th scope="row">Autor:</th>
+                <td th:text="${session.book.author.name} + ' ' + ${session.book.author.surname}">Mark</td>
+            </tr>
+            <tr>
+                <th scope="row">Katogoria:</th>
+                <td th:text="${session.book.category.name}">Horror</td>
+            </tr>
+            <tr>
+                <th scope="row">Ilość stron:</th>
+                <td th:text="${session.book.amountOfPages}"></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
     <div style="clear:left; margin:auto; width:40%; margin-bottom:10px;">
-            <form th:action="@{/addReview}" th:object="${newReview}" method="post">
-                Treść:<br>
-                <textarea th:field="*{content}" rows="5" wrap="soft" style="width:500px;"></textarea><br>
-                <input type="submit" class="btn" value="Add review">
-            </form>
+        <form th:action="@{/addReview}" th:object="${newReview}" method="post">
+            Treść:<br>
+            <textarea th:field="*{content}" rows="5" wrap="soft" style="width:500px;"></textarea><br>
+            <input type="submit" class="btn" value="Dodaj recenzję">
+        </form>
     </div>
 
-<div>
-    <table class="table" style="width: 50%">
-        <th:block th:each="review : ${reviews}">
-            <tr>
-                <td th:text="${review.user.name} + ' ' + ${review.user.surname}">Mark</td>
-                <td th:text="${review.content}">Content</td>
-            </tr>
-        </th:block>
-    </table>
-</div>
+    <div style="clear:left; margin:auto; width:40%; margin-bottom:10px;">
+        <table class="table" style="width: 50%">
+            <th:block th:each="review : ${reviews}">
+                <tr>
+                    <td th:text="${review.user.name} + ' ' + ${review.user.surname}">Mark</td>
+                    <td th:text="${review.content}">Content</td>
+                </tr>
+            </th:block>
+        </table>
+    </div>
 
 
 </div>

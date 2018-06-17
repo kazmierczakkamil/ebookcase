@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>eBookcase</title>
+    <title>eBookcase - add book</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
     <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}"
@@ -21,7 +21,6 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-<<<<<<< HEAD
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Książki
                         <span class="caret"></span>
@@ -32,32 +31,23 @@
                     </ul>
                 </li>
                 <li><a th:href="@{/newauthor}">Autorzy</a></li>
-=======
-                <li><a th:href="@{/books}">Książki</a></li>
-                <li><a th:href="@{/authors}">Autorzy</a></li>
-                <li><a th:href="@{/categories}">Kategorie</a></li>
->>>>>>> abd34df056390016f36c55f6552eea59883ef00a
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Moja biblioteka
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="#" th:href="@{/myBooks}">Moje książki</a></li>
-<<<<<<< HEAD
                         <!--<li><a href="#">Moje półki</a></li>-->
                         <!--<li role="separator" class="divider"></li>-->
                         <!--<li class="dropdown-header">Nav header</li>-->
                         <!--<li><a href="#">Separated link</a></li>-->
                         <!--<li><a href="#">One more separated link</a></li>-->
-=======
->>>>>>> abd34df056390016f36c55f6552eea59883ef00a
                     </ul>
                 </li>
-                <li><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/addBook}">Dodaj książkę</a></li>
-                <li><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/addAuthor}">Dodaj autora</a></li>
-                <li><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/addCategory}">Dodaj kategorię</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                <!--<li><a href="#">Default</a></li>-->
+                <!--<li><a href="#">Static top <span class="sr-only">(current)</span></a></li>-->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <span class="glyphicon glyphicon-user"></span>
@@ -66,7 +56,7 @@
                     <ul class="dropdown-menu">
                         <li>
                             <a href="#">
-                                <a th:href="@{/logout}" th:text="Wyloguj"></a>
+                                <a th:href="@{/logout}" th:text="Logout"></a>
                             </a>
                         </li>
                     </ul>
@@ -75,35 +65,35 @@
         </div>
     </div>
 </nav>
-<div class="jumbotron">
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nazwisko autora</th>
-            <th scope="col">Imię autora</th>
-            <th scope="col">Tytuł</th>
-            <th scope="col">Kategoria</th>
-            <th scope="col">Ilość stron</th>
-        </tr>
-        </thead>
-        <tbody>
-        <th:block th:each="book,iter : ${books}">
-                <tr>
-                    <th scope="row" th:text="${iter.index+1}">1</th>
-                    <td th:text="${book.author.surname}">Mark</td>
-                    <td th:text="${book.author.name}">Mark</td>
-                    <td th:text="${book.title}">Otto</td>
-                    <td th:text="${book.category.name}">Mark</td>
-                    <td th:text="${book.amountOfPages}">Mark</td>
-                    <td><a th:href="@{/book/}+${book.id}" class="btn btn-primary" role="button">Otwórz</a></td>
-                    <td th:if="!${bookcaseRecordService.isUserBookcaseContainsBook(book, session.user)}"><a th:href="@{/add/book/}+${book.id}" class="btn btn-primary" role="button">Dodaj do biblioteki</a></td>
-                    <td th:if="${bookcaseRecordService.isUserBookcaseContainsBook(book, session.user)}"><a th:href="@{/remove/book/}+${book.id}" class="btn btn-primary" role="button">Usuń z biblioteki</a></td>
-                </tr>
-        </th:block>
-        </tbody>
-    </table>
+
+<div class="container text-center" >
+    <h4>Dodaj książkę</h4>
 </div>
+<div class="container">
+    <form th:action="@{/newBook}" method="post" class="form-horizontal">
+        <div class="form-group">
+            <label for="title" class="col-sm-5 control-label">Tytuł:</label>
+            <div class="col-sm-3">
+                <input type="text" id="title" class="form-control" placeholder="Title"
+                       required
+                       autofocus>
+            </div>
+            <label for="amountOfPages" class="col-sm-5 control-label">Ilość stron:</label>
+            <div class="col-sm-3">
+                <input type="text" id="amountOfPages" class="form-control"
+                       placeholder="Amount Of Pages"
+                       required>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-5 col-md-7">
+                <button class="btn btn-default btn-primary" type="submit">Dodaj</button>
+            </div>
+        </div>
+    </form>
+</div> <!-- /container -->
+
+
 
 </body>
 </html>
