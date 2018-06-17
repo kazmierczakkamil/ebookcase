@@ -65,6 +65,6 @@
         </div>
     </div>
 </nav>
-<div class="welcome" style="clear:left; margin:auto; width:20%; margin-bottom:10px;">
-    <h1><span sec:authorize="isAuthenticated()">Welcome <span sec:authentication="name">Mark</span></span></h1>
+<div class="welcome" style="clear:left; margin:auto; width:30%; margin-bottom:10px;">
+    <h1><span sec:authorize="isAuthenticated()">Witaj <span th:text="${session.username}">Mark</span></span></h1>
 </div>

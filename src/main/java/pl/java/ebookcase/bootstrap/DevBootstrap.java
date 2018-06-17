@@ -79,7 +79,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         user3 = userService.save(user3);
 
         Review review1 = new Review("Bardzo dobra książka.", book1, user1);
-        Review review2 = new Review("Wy****** mam w to.", book1, user2);
+        Review review2 = new Review("Jedno z najwspanialszych dzieł jakie miałem przyjemność poznać.", book1, user2);
 
         BookcaseRecord record1 = new BookcaseRecord(book1, user1.getBookcase());
         BookcaseRecord record2 = new BookcaseRecord(book2, user1.getBookcase());
