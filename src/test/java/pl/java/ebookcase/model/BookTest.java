@@ -15,7 +15,7 @@ public class BookTest {
 
     @Test
     public void typeAnnotations() {
-        pl.java.ebookcase.model.AssertAnnotations.assertType(Author.class, Entity.class, Table.class);
+        pl.java.ebookcase.model.AssertAnnotations.assertType(Book.class, Entity.class, Table.class);
     }
 
     @Test
